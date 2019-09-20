@@ -1,9 +1,4 @@
-# INFRA DIAGRAM
-
-
-
-
-This repository is created to soley learn terraform which would be used with KOPS. 
+This repository is created for personal use.
 Infrastructure consists of 
 * S3 bucket
 * VPC
@@ -15,3 +10,6 @@ Infrastructure consists of
   * CORRESPONDING ROUTE TABLES
 
 Later whenever required it would be upgraded.
+
+# INFRA DIAGRAM HERE
+
