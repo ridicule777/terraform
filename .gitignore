@@ -1,0 +1,5 @@
+pre-requisites/.terraform
+pre-requisites/.terraform/*
+pre-requisites/tfplan
+*terraform.tfstate
+pre-requisites/*terraform.tfstate
