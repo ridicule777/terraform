@@ -13,6 +13,13 @@ provider "aws" {
 }
 
 
+# Declare Variable for Pre-requisite Dynamo DB Table Name
+
+variable "prerequisite_bucket_name" {
+  default = "tf-state-store-mj"
+  type    = "string"
+}
+
 # Create a bucket.
 # SET ACL to Private.
 # Enable Versioning.
@@ -21,7 +28,7 @@ provider "aws" {
 # Create Tags.
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "tf-state-store-mj"
+  bucket = "${var.prerequisite_bucket_name}"
   acl    = "private"
   versioning {
     enabled = true
@@ -35,15 +42,21 @@ resource "aws_s3_bucket" "terraform_state" {
   }
   force_destroy = true
   tags = {
-    Name = "terraform_state_store_mj"
+    Name = "${var.prerequisite_bucket_name}"
   }
 }
 
 
+# Declare Variable for Pre-requisite Dynamo DB Table Name
+variable "prerequisite_dynamodb_name" {
+  default = "terraform_state_lock"
+  type    = "string"
+}
+
 # Create a dynamodb Table with the primary key called  LockID.
 
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  name         = "terraform-state-lock"
+  name         = "${var.prerequisite_dynamodb_name}"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
   attribute {
